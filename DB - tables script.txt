@@ -1,0 +1,120 @@
+CREATE TABLE `COP4331`.`Users` 
+( 
+`ID` INT NOT NULL AUTO_INCREMENT , 
+`DateCreated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+`DateLastLoggedIn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+`FirstName` VARCHAR(50) NOT NULL DEFAULT '' , 
+`LastName` VARCHAR(50) NOT NULL DEFAULT '' , 
+`Login` VARCHAR(50) NOT NULL DEFAULT '' , 
+`Password` VARCHAR(50) NOT NULL DEFAULT '' , 
+PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `COP4331`.`Contacts` 
+( 
+`ID` INT NOT NULL AUTO_INCREMENT , 
+`Name` VARCHAR(50) NOT NULL DEFAULT '' , 
+`Phone` VARCHAR(50) NOT NULL DEFAULT '' , 
+`Email` VARCHAR(50) NOT NULL DEFAULT '' , 
+`Country` VARCHAR(50) NOT NULL DEFAULT '',
+`StateProvince` VARCHAR(50) NOT NULL DEFAULT '',
+`City` VARCHAR(50) NOT NULL DEFAULT '',
+`Address` VARCHAR(50) NOT NULL DEFAULT '',
+`UserID` INT NOT NULL DEFAULT '0' , 
+PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Dwight','Schrute','DSchrute','AssistantRM');
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Peter','Parker','PParker','Friendly');
+insert into Users (FirstName,LastName,Login,Password) VALUES ('User','User','Admin','Password');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Darlene J. Quinn',
+'603-229-688',
+'DarleneJQuinn@dayrep.com',
+'Sweden',
+'-',
+'Lund',
+'41, Nilstorpsvagen',
+'1');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('William S. Bennett',
+'832-575-5457', 
+'WilliamSBennett@rhyta.com',
+'United States',
+'TX',
+'Houston',
+'1162 Circle Drive',
+'1');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Richard K. Preece',
+'706-542-8342', 
+'RichardKPreece@armyspy.com',
+'Portugal',
+'Estremadura',
+'Lisbon',
+'58928 Cristina Row',
+'1');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Cosette Valle Barraza',
+'805-246-3774', 
+'CosetteValleBarraza@jourrapide.com',
+'Canada',
+'British Columbia',
+'Vancouver',
+'39666 Mosciski Port',
+'1');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Philipe Duperre',
+'517-979-5675', 
+'PhilipeDuperre@dayrep.com',
+'Australia',
+'New South Wales',
+'Sydney',
+'37548 Hermann Vista',
+'1');
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Carlos M. Young',
+'850-254-1312', 
+'CarlosMYoung@jourrapide.com',
+'United States',
+'FL',
+'Tallahassee',
+'4740 Virgil Street',
+'1');	
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Gertha B. Klein',
+'661-324-5887', 
+'GerthaBKlein@dayrep.com',
+'United States',
+'CA',
+'Bakersfield',
+'3754 Williams Avenue',
+'2');	
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Marilyn E. Vernon',
+'077 1325 3348', 
+'MarilynEVernon@armyspy.com',
+'United Kingdom',
+'West Midlands',
+'Birmingham',
+'23 Farburn Terrace',
+'2');	
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Spencer B. Menzies',
+'514-778-2782', 
+'SpencerBMenzies@rhyta.com',
+'Canada',
+'Quebec',
+'Montreal',
+'954 rue Levy',
+'2');	
+
+insert into Contacts (Name,Phone,Email,Country,StateProvince,City,Address,UserID) VALUES ('Vivian N. Roberts',
+'714-680-9239', 
+'VivianNRoberts@jourrapide.com',
+'United States',
+'CA',
+'Fullerton',
+'4590 Alpaca Way',
+'2');																								
