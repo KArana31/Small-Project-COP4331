@@ -1,0 +1,265 @@
+body
+{
+   background-image: linear-gradient(135deg, #008080 10%, #e1b382 90%);
+  background-attachment: fixed;
+
+}
+
+#title
+{
+    font-size: 20px;
+    width: 100%;
+    margin: 2% 5%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+
+}
+#topDiv
+{
+    font-size: 60px;
+    font-weight: bold;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #9BE7CD;
+    background-image: url(https://t4.ftcdn.net/jpg/01/79/55/63/360_F_179556365_QgWbVSvEQ682O6VUUXiSms4HsQGE30VJ.jpg);
+     border-radius: 25px 25px 0px 0px;
+     box-shadow: 10px 5px 5px #545454;
+}
+
+#loginDiv
+{
+    font-size: 40px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #FFFFFF;
+     border-radius: 0px 0px 25px 25px;
+     box-shadow: 10px 5px 5px #545454;
+
+}
+
+
+#loggedInDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #FFFFFF;
+     border-radius: 25px 25px 0px 0px;
+     box-shadow: 10px 5px 5px #545454;
+}
+
+#accessUIDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #FFFFFF;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 10px 5px 5px #545454;
+}
+
+.buttons
+{
+    background-color: #008080;
+    font-size: 15px;
+    border-radius: 25px;
+    border-color: #008080;
+    width: 50%;
+    margin-left: 25%;
+    font-family: 'Ubuntu', sans-serif;
+    box-shadow: 0 0.5em 1.5em -0.5em #008080;
+
+}
+
+.buttons:hover{
+    background-color: #008080;
+    color: #FFFFFF;
+    opacity: 50%;
+}
+
+#loginName
+{
+	font-size: 20px;
+
+}
+#loginPassword
+{
+	font-size: 20px;
+}
+#searchText
+{
+	font-size: 20px;
+}
+#colorText
+{
+	font-size: 20px;
+}
+
+input[type="text"],input[type="password"]{
+    border-radius: 0px;
+    border-width: 0px 0px 2px 0px;
+    text-align: left;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#inner-title{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+#bottom-title{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #000000;
+}
+
+#loginResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+#userName{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+#loginButton{
+  width: 25%;
+  margin-left:65%;
+  color: #FFFFFF
+}
+
+#logoutButton{
+    width: 20%;
+    margin-left: 40%;
+}
+
+select{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#colorSearchResult{
+    display: center;
+    color: 000000;
+}
+
+#colorAddResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+
+#welcometext{
+    display: inline-block;
+    font-size: 15px;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-image: linear-gradient(135deg, #008080 10%, #e1b382 90%);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 25px;
+  box-shadow: 10px 5px 5px #545454;
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+    width: 100%;
+  }
+}
