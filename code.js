@@ -91,12 +91,61 @@ function readCookie()
 
 	if( userId < 0 )
 	{
-		//window.location.href = "index.html";
+		window.location.href = "index.html";
 	}
 	else
 	{
 		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
+}
+
+function createUser()
+{
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
+	let username = document.getElementById("regUsername").value;
+	let password = document.getElementById("regPassword").value;
+	document.getElementById("registerResult").innerHTML = "";
+
+	let tmp = {firstName:firstName, lastName:lastName, login:login, password:password};
+//	var tmp = {login:login,password:hash};
+	let jsonPayload = JSON.stringify(tmp);
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		// Check if username already exists or if password is too short or too long
+		// If valid, assign user ID and create user before returning to index.
+		// Else, display error message.
+		if()
+		{
+			document.getElementById("registerResult").innerHTML = "User has been created.";
+			backToLogin();
+		}
+		else
+		{
+			document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
+		}
+	}
+	catch (err)
+	{
+		document.getElementById("registerResult").innerHTML = err.message;
+	}
+}
+
+function goRegister()
+{
+	window.location.href = "register.html";
+	// let url = urlBase + '/Register.' + extension;
+}
+
+function backToLogin()
+{
+	window.location.href = "index.html";
+	// let url = urlBase + '/Index.' + extension;
 }
 
 function doLogout()
@@ -127,7 +176,7 @@ function addColor()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
+				document.getElementById("colorAddResult").innerHTML = "Contact has been added";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -160,7 +209,7 @@ function searchColor()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+				document.getElementById("colorSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 
 				for( let i=0; i<jsonObject.results.length; i++ )
@@ -182,44 +231,4 @@ function searchColor()
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
 
-}
-
-//
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-
-function addUser(){
-	let newUser = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = {color:newUser,userId,userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddUser.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				document.getElementById("colorAddResult").innerHTML = "User has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
 }

@@ -1,8 +1,7 @@
 body
 {
-   background-image: linear-gradient(135deg, #008080 10%, #e1b382 90%);
+  background-image: linear-gradient(135deg, #008080 10%, #e1b382 90%);
   background-attachment: fixed;
-
 }
 
 #title
@@ -13,9 +12,9 @@ body
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     color: #FFFFFF;
-
 }
-#topDiv
+
+#topDiv, #topRegDiv
 {
     font-size: 60px;
     font-weight: bold;
@@ -28,7 +27,7 @@ body
      box-shadow: 10px 5px 5px #545454;
 }
 
-#loginDiv
+#loginDiv, #regDiv
 {
     font-size: 40px;
     width: 70%;
@@ -37,7 +36,6 @@ body
     background-color: #FFFFFF;
      border-radius: 0px 0px 25px 25px;
      box-shadow: 10px 5px 5px #545454;
-
 }
 
 
@@ -73,34 +71,35 @@ body
     margin-left: 25%;
     font-family: 'Ubuntu', sans-serif;
     box-shadow: 0 0.5em 1.5em -0.5em #008080;
-
 }
 
-.buttons:hover{
+.buttons:hover
+{
     background-color: #008080;
     color: #FFFFFF;
     opacity: 50%;
 }
 
-#loginName
-{
-	font-size: 20px;
-
-}
-#loginPassword
-{
-	font-size: 20px;
-}
-#searchText
-{
-	font-size: 20px;
-}
-#colorText
+#firstName, #lastName, #loginName, #loginPassword, #searchText,
+#colorText, #regUsername, #regPassword
 {
 	font-size: 20px;
 }
 
-input[type="text"],input[type="password"]{
+#login-rules
+{
+    display: inline-block;
+    font-size: 20px;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #000000;
+}
+
+input[type="text"], input[type="password"]
+{
     border-radius: 0px;
     border-width: 0px 0px 2px 0px;
     text-align: left;
@@ -110,7 +109,8 @@ input[type="text"],input[type="password"]{
     font-family: 'Ubuntu', sans-serif;
 }
 
-#inner-title{
+#inner-title, #reg-title
+{
     display: inline-block;
     font-size: 0.8em;
     width: 90%;
@@ -121,7 +121,8 @@ input[type="text"],input[type="password"]{
     color: #FFFFFF;
 }
 
-#bottom-title{
+#bottom-title
+{
     display: inline-block;
     font-size: 0.8em;
     width: 90%;
@@ -132,7 +133,8 @@ input[type="text"],input[type="password"]{
     color: #000000;
 }
 
-#loginResult{
+#loginResult, #registerResult
+{
     display: inline-block;
     font-size: 0.8em;
     width: 90%;
@@ -143,24 +145,30 @@ input[type="text"],input[type="password"]{
     color: #FFFFFF;
 }
 
-#userName{
+#userName
+{
     display: inline-block;
     width: 80%;
     margin-left: 10%;
     text-align: center;
 }
-#loginButton{
+
+#loginButton, #toRegButton, #registerButton, #toLogButton
+{
   width: 25%;
   margin-left:65%;
+  margin-top: 1%;
   color: #FFFFFF
 }
 
-#logoutButton{
+#logoutButton
+{
     width: 20%;
     margin-left: 40%;
 }
 
-select{
+select
+{
     width: 30%;
     margin-left: 35%;
     margin-top: 2%;
@@ -168,12 +176,14 @@ select{
     font-family: 'Ubuntu', sans-serif;
 }
 
-#colorSearchResult{
+#colorSearchResult
+{
     display: center;
     color: 000000;
 }
 
-#colorAddResult{
+#colorAddResult
+{
     display: inline-block;
     font-size: 0.8em;
     width: 90%;
@@ -185,81 +195,14 @@ select{
     color: #95060a;
 }
 
-#welcometext{
+#welcometext, #inner-RegTitle
+{
     display: inline-block;
-    font-size: 15px;
+    font-size: 20px;
     width: 90%;
     text-align: center;
     margin-left: 5%;
     margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
     color: #FFFFFF;
-}
-
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-image: linear-gradient(135deg, #008080 10%, #e1b382 90%);
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  border-radius: 25px;
-  box-shadow: 10px 5px 5px #545454;
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-    width: 100%;
-  }
 }
