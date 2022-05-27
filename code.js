@@ -1,4 +1,4 @@
-const urlBase = 'http://4331COP.com/LAMPAPI';
+const urlBase = 'http://www.4331COP.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -21,7 +21,7 @@ function doLogin()
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/Login.' + extension;
+	let url = urlBase + '/LoginAPI.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
