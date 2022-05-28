@@ -1,4 +1,4 @@
-const urlBase = 'http://4331COP.com/LAMPAPI';
+const urlBase = 'http://www.4331COP.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -21,7 +21,7 @@ function doLogin()
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/Login.' + extension;
+	let url = urlBase + '/LoginAPI.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -37,7 +37,7 @@ function doLogin()
 
 				if( userId < 1 )
 				{
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					document.getElementById("loginResult").innerHTML = "Incorrect Username or Password.";
 					return;
 				}
 
@@ -107,33 +107,45 @@ function createUser()
 	let password = document.getElementById("regPassword").value;
 	document.getElementById("registerResult").innerHTML = "";
 
-	let tmp = {firstName:firstName, lastName:lastName, login:login, password:password};
-//	var tmp = {login:login,password:hash};
+	let tmp = {firstName:firstName, lastName:lastName, login:regUsername, password:regPassword};
+	//	var tmp = {firstName:firstName, lastName:lastName, login:login, password:hash};
 	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/Register.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
+	// /*
 	try
 	{
-		// Check if username already exists or if password is too short or too long
-		// If valid, assign user ID and create user before returning to index.
-		// Else, display error message.
-		if()
+		xhr.onreadystatechange = function()
 		{
-			document.getElementById("registerResult").innerHTML = "User has been created.";
-			backToLogin();
-		}
-		else
-		{
-			document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
-		}
+			if(this.readyState == 4 && this.status == 200)
+			{
+				let jsonObject = JSON.parse(xhr.responseText);
+				userId = jsonObject.id;
+
+				// Check if username already exists or if password is too short or too long
+				// Else, assign user ID and add to database before returning to index
+				if(userId < 1)
+				{
+					document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
+					return;
+				}
+
+				document.getElementById("registerResult").innerHTML = "User has been created.";
+				backToLogin();
+			}
+		};
+		xhr.send(jsonPayload);
 	}
 	catch (err)
 	{
 		document.getElementById("registerResult").innerHTML = err.message;
 	}
+	// */
 }
 
 function goRegister()
