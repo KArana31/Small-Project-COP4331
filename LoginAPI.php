@@ -28,7 +28,7 @@
 		if( $row = $result->fetch_assoc()  )
 		{
 			// return infor if login info found
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
 		}
 		else
 		{
