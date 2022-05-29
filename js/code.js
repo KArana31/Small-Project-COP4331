@@ -5,6 +5,7 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+
 function doLogin()
 {
 	userId = 0;
@@ -101,39 +102,49 @@ function readCookie()
 
 function createUser()
 {
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let username = document.getElementById("regUsername").value;
-	let password = document.getElementById("regPassword").value;
-	document.getElementById("registerResult").innerHTML = "";
+    
+    userId = 0;
+    firstName = "";
+    lastName = "";
 
-	let tmp = {firstName:firstName, lastName:lastName, login:login, password:password};
-//	var tmp = {login:login,password:hash};
-	let jsonPayload = JSON.stringify(tmp);
+    let fName = document.getElementById("firstName").value;
+    let lName = document.getElementById("lastName").value;
+    let login = document.getElementById("regUsername").value;
+    let password = document.getElementById("regPassword").value;
+    document.getElementById("registerResult").innerHTML = "";
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    var tmp = {firstName:fName,lastName:lName,login:login,password:password};
+//  var tmp = {login:login,password:hash};
+    let jsonPayload = JSON.stringify(tmp);
 
-	try
-	{
-		// Check if username already exists or if password is too short or too long
-		// If valid, assign user ID and create user before returning to index.
-		// Else, display error message.
-		if()
-		{
-			document.getElementById("registerResult").innerHTML = "User has been created.";
-			backToLogin();
-		}
-		else
-		{
-			document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
-		}
-	}
-	catch (err)
-	{
-		document.getElementById("registerResult").innerHTML = err.message;
-	}
+    let url = urlBase + '/Register.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        
+    try
+    {
+        xhr.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                document.getElementById("registerResult").innerHTML = "User has been created.";
+            backToLogin();
+            }
+            else
+        {
+            document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
+        }
+        };
+        xhr.send(jsonPayload);
+    }
+
+
+    catch (err)
+    {
+        document.getElementById("registerResult").innerHTML = err.message;
+    }
 }
 
 function goRegister()
