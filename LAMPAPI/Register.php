@@ -1,60 +1,79 @@
 <?php
 
-	// retrieves results from the getRequestInfo function
-	// stores the data from json file in an array
-	$inData = getRequestInfo();
+    // retrieves results from the getRequestInfo function
+    // stores the data from json file in an array
+    $inData = getRequestInfo();
 
-	$FirstName = $inData["FirstName"];
-    $LastName = $inData["LastName"];
-	$Login = $inData["Login"];
-    $Password = $inData["Password"];
+    
+    $firstName  = $inData["firstName"];
+    $lastName = $inData["lastName"];
+    $login = $inData["login"];
+    $password = $inData["password"];
 
-	
-	// open a new connection to the MySQL server
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	
-	// check if new connection is valid
-	if ($conn->connect_error)
-	{
-		// returns connection error
-		returnWithError($conn->connect_error);
-	}
-	else
-	{
-		// if the connection is valid 
-		// prepare an SQL statement for execution and then bind variables to the statement as parameters
-		$stmt = $conn->prepare("INSERT INTO Users (FirstName,LastName,Login,Password) VALUES (?,?,?,?)");
-		$stmt->bind_param("ssss", $FirstName, $LastName, $Login, $Password);
-		
-		// execute and close the SQL statement
-		$stmt->execute();
+    // open a new connection to the MySQL server
+    $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+    
+    if ($conn->connect_error) 
+    {
+        returnWithError( $conn->connect_error );
+    }
+    else
+    {
+        # Get all IDs of the users with the given login.  
+        $getId = $conn->prepare("SELECT ID FROM Users WHERE Login=?");
+        $getId->bind_param("s", $inData["login"]);
+        $getId->execute();
+        $result = $getId->get_result();
 
-        $stmt->close();
-		
-		// close the connection and return without error
-		$conn->close();
-        returnWithError("");
+        # check if there is already a user with that login, return error
+        if ($row = $result->fetch_assoc())
+        {
+            returnWithError("login in use");
+        }
+        else
+        {
+            #Create a user 
+            $stmt = $conn->prepare("INSERT into Users (firstName,lastName,login,password) VALUES(?,?,?,?)");
+            $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
+            $stmt->execute();
+            $stmt->close();
 
-	}
+            #Get ID of the new user
+            $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
+            $stmt->bind_param("ss", $inData["login"], $inData["password"]);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
 
-	function getRequestInfo()
-	{
-		// takes a json object and convert it into a php object
-		return json_decode(file_get_contents('php://input'), true);
-	}
-	
-	function sendResultInfoAsJson( $obj )
-	{
-		// sends a raw http header
-		header('Content-type: application/json');
-		echo $obj;	// print error message
-	}
-	
-	function returnWithError( $err )
-	{
-		// stores connection error in string 
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
+            $stmt->close();
+            $conn->close();
+            
+        
+            returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+        }
+    }
 
+    function getRequestInfo()
+    {
+        return json_decode(file_get_contents('php://input'), true);
+    }
+
+    function sendResultInfoAsJson( $obj )
+    {
+        header('Content-type: application/json');
+        echo $obj;
+    }
+    
+    function returnWithError( $err )
+    {
+        $retValue = '{"error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
+    function returnWithInfo( $firstName, $lastName, $id )
+    {
+        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        sendResultInfoAsJson( $retValue );
+    }
+    
 ?>
