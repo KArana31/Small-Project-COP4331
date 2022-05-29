@@ -4,11 +4,11 @@
 	// stores the data from json file in an array
 	$inData = getRequestInfo();
 
-	$name = $inData["name"];
-	$phone = $inData["phone"];
-	$email = $inData["email"];
-	$address = $inData["address"];
-	$userId = $inData["userId"];
+	$FirstName = $inData["FirstName"];
+    $LastName = $inData["LastName"];
+	$Login = $inData["Login"];
+    $Password = $inData["Password"];
+
 	
 	// open a new connection to the MySQL server
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -23,16 +23,18 @@
 	{
 		// if the connection is valid 
 		// prepare an SQL statement for execution and then bind variables to the statement as parameters
-		$stmt = $conn->prepare("INSERT into Contacts (Name,Phone,Email,Address,UserID) VALUES (?,?,?,?,?)");
-		$stmt->bind_param("ssssssss", $name, $phone, $email, $address, $userId);
+		$stmt = $conn->prepare("INSERT INTO Users (FirstName,LastName,Login,Password) VALUES (?,?,?,?)");
+		$stmt->bind_param("ssss", $FirstName, $LastName, $Login, $Password);
 		
 		// execute and close the SQL statement
 		$stmt->execute();
-		$stmt->close();
+
+        $stmt->close();
 		
 		// close the connection and return without error
 		$conn->close();
-		returnWithError("");
+        returnWithError("");
+
 	}
 
 	function getRequestInfo()
@@ -54,4 +56,5 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
+
 ?>
