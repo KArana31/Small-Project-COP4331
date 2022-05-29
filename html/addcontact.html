@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>COP 4331 LAMP Stack Demo - Add New Contact</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+</head>
+<body>
+
+<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+
+<div id="topRegDiv">
+	<span id="reg-title">Welcome.</span>
+	<h1 id="inner-RegTitle">Fill in the following fields to add a new contact.</h1>
+</div>
+
+<div id="regDiv">
+	<input type="text" id="firstName" placeholder="First Name" /><br />
+	<input type="text" id="lastName" placeholder="Last Name"/><br />
+	<input type="text" id="email" placeholder="Email" /><br />
+	<input type="text" id="phoneNumber" placeholder="Phone Number"/><br />
+	<button type="button" id="addcontactButton" class="buttons" onclick="addContact();"> Add Contact </button>
+	<button type="button" id="toLogButton" class="buttons" onclick="backToHome();"> Back </button>
+	<span id="AddContactsResult"></span>
+</div>
+
+</body>
+</html>
