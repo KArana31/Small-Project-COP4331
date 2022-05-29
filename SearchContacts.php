@@ -21,13 +21,13 @@
 	{
 		// if the connection is valid 
 		// prepare an SQL statement for execution and then bind variables to the statement as parameters
-		$stmt = $conn->prepare("select Name from Contacts where Name like ? and UserID=?");
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE Name LIKE ? and UserID=?");
 		$name = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $name, $inData["UserID"]);
 		$stmt->execute();	// execute SQL statement
 		
 		// gets the result of the prepared SQL statement
-		$result = $stmt->get_result()
+		$result = $stmt->get_result();
 		
 		// loops through each row in the array
 		// fetch_assoc() fetches the next row of a result set as an associative array
@@ -42,7 +42,10 @@
 			
 			// append contact name to result
 			//$searchResults .= '"' . $row["Name"] . '"'. $row["Phone"] .'"' . $row["Email"] .'"'. $row["Address"] . '"'. $row["UserID"] . '"';
-			$searchResults .= '{"Name": "'. $row["Name"].'", "Phone": "'.$row["Phone"]. '", "Email" : "' . $row["Email"]. '"}'
+			$searchResults .= '{"Name": "'. $row["Name"]. '",
+						"Phone": "'. $row["Phone"]. '",
+						"Email": "' . $row["Email"]. '",
+						"Address": "'. $row["Address"]. '"}';
 		}
 	
 		if( $searchCount == 0 )
