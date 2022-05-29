@@ -21,7 +21,7 @@
 	{
 		// if the connection is valid 
 		// prepare an SQL statement for execution and then bind variables to the statement as parameters
-		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE Name LIKE ? and UserID=?");
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE Name LIKE ? AND UserID=?");
 		$name = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $name, $inData["UserID"]);
 		$stmt->execute();	// execute SQL statement
