@@ -18,7 +18,7 @@
 	{
 		//  if the connection is valid 
 		// prepare an SQL statement for execution and then bind variables to the statement as parameters
-		$stmt = $conn->prepare("SELECT ID,DateCreated,DateLastLoggedIn,FirstName,LastName FROM Users WHERE Login=? AND Password =?");
+		$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE Login=? AND Password =?");
 		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
 		
 		// execute SQL statement and get the result
