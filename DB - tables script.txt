@@ -13,7 +13,8 @@ PRIMARY KEY (`ID`)
 CREATE TABLE `COP4331`.`Contacts` 
 ( 
 `ID` INT NOT NULL AUTO_INCREMENT , 
-`Name` VARCHAR(50) NOT NULL DEFAULT '' , 
+`FirstName` VARCHAR(50) NOT NULL DEFAULT '' , 
+`LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
 `Phone` VARCHAR(50) NOT NULL DEFAULT '' , 
 `Email` VARCHAR(50) NOT NULL DEFAULT '' , 
 `Address` VARCHAR(50) NOT NULL DEFAULT '',
@@ -26,61 +27,61 @@ insert into Users (FirstName,LastName,Login,Password) VALUES ('Dwight','Schrute'
 insert into Users (FirstName,LastName,Login,Password) VALUES ('Peter','Parker','PParker','Friendly');
 insert into Users (FirstName,LastName,Login,Password) VALUES ('User','User','Admin','Password');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Darlene J. Quinn',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Darlene', 'Quinn',
 '603-229-688',
 'DarleneJQuinn@dayrep.com',
 '36 N. Tailwater Drive Silver Spring, MD 20901',
 '1');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('William S. Bennett',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('William', 'Bennett',
 '832-575-5457', 
 'WilliamSBennett@rhyta.com',
 '1162 Circle Drive Houston, TX 77003',
 '1');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Richard K. Preece',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Richard', 'Preece',
 '706-542-8342', 
 'RichardKPreece@armyspy.com',
 '7969 Brook Ave. Watertown, MA 02472',
 '1');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Cosette Valle Barraza',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Cosette', 'Barraza',
 '805-246-3774', 
 'CosetteValleBarraza@jourrapide.com',
 '686 Greystone Rd. Huntington Station, NY 11746',
 '1');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Philipe Duperre',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Philipe', 'Duperre',
 '517-979-5675', 
 'PhilipeDuperre@dayrep.com',
 '8889 NE. Ridge Drive Pottstown, PA 19464',
 '1');
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Carlos M. Young',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Carlos', 'Young',
 '850-254-1312', 
 'CarlosMYoung@jourrapide.com',
 '4740 Virgil Street Tallahassee, FL 32302',
 '1');	
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Gertha B. Klein',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Gertha', 'Klein',
 '661-324-5887', 
 'GerthaBKlein@dayrep.com',
 '3754 Williams Avenue Bakersfield, CA 93309',
 '2');	
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Marilyn E. Vernon',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Marilyn', 'Vernon',
 '077 1325 3348', 
 'MarilynEVernon@armyspy.com',
 '8889 NE. Ridge Drive Pottstown, PA 19464',
 '2');	
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Spencer B. Menzies',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Spencer', 'Menzies',
 '514-778-2782', 
 'SpencerBMenzies@rhyta.com',
 '617 Broad Court Ontario, CA 91762',
 '2');	
 
-insert into Contacts (Name,Phone,Email,Address,UserID) VALUES ('Vivian N. Roberts',
+insert into Contacts (FirstName,LastName,Phone,Email,Address,UserID) VALUES ('Vivian', 'Roberts',
 '714-680-9239', 
 'VivianNRoberts@jourrapide.com',
 '4590 Alpaca Way Fullerton, CA 92834',
