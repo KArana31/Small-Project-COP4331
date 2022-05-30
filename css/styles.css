@@ -81,7 +81,7 @@ body
 }
 
 #firstName, #lastName, #loginName, #loginPassword, #searchText,
-#colorText, #regUsername, #regPassword
+#colorText, #regUsername, #regPassword, #email, #phoneNumber, #address
 {
 	font-size: 20px;
 }
@@ -157,14 +157,23 @@ input[type="text"], input[type="password"]
 {
   width: 25%;
   margin-left:65%;
-  margin-top: 1%;
+  margin-top: 3%;
   color: #FFFFFF
+}
+
+#addContactButton{
+  width: 50%;
+  margin: center;
+  margin-top: 3%;
+  color: #FFFFFF
+
 }
 
 #logoutButton
 {
     width: 20%;
     margin-left: 40%;
+    color:#FFFFFF;
 }
 
 select
@@ -205,4 +214,20 @@ select
     margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
     color: #FFFFFF;
+}
+
+#contactSearchResult{
+    display: none;
+}
+
+#contactAddResult{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #000000;
 }
