@@ -4,12 +4,12 @@
 	// stores the data from json file in an array
 	$inData = getRequestInfo();
 
-	$firstName = $inData["FirstName"];
-	$lastName = $inData["LastName"];
-	$phone = $inData["Phone"];
-	$email = $inData["Email"];
-	$address = $inData["Address"];
-	$userId = $inData["UserID"];
+	$firstName = $inData["firstName"];
+	$lastName = $inData["lastName"];
+	$phone = $inData["phoneNumber"];
+	$email = $inData["email"];
+	$address = $inData["address"];
+	$userId = $inData["userId"];
 	
 	// open a new connection to the MySQL server
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
