@@ -198,10 +198,10 @@ function searchContact()
 
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
-					contactList += jsonObject.results[i];
+					contactList += jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + " " + jsonObject.results[i].Phone + " " + jsonObject.results[i].Email + " " + jsonObject.results[i].Address;
 					if( i < jsonObject.results.length - 1 )
 					{
-						contactList += "<br />\r\n";
+						contactList += "<br />\r\n\n";
 					}
 				}
 
@@ -242,7 +242,8 @@ function addContact()
             if (this.readyState == 4 && this.status == 200)
             {
                 document.getElementById("AddContactsResult").innerHTML = "Contact has been added.";
-				//backToHome();		 
+								saveCookie();
+				//backToHome();
 			}
         };
         xhr.send(jsonPayload);
@@ -256,6 +257,7 @@ function addContact()
 
 function goAddContact()
 {
+	readCookie();
 	window.location.href = "addcontact.html";
 	// let url = urlBase + '/Register.' + extension;
 }
