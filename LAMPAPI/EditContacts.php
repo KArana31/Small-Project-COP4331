@@ -17,7 +17,7 @@
 	{
 		try{
 			$stmt = $conn->prepare("Update Contacts SET FirstName = ?, LastName = ?, Phone = ?, Email = ?, Address = ? WHERE ID = ? AND UserID = ?");
-			$stmt->bind_param("sssss", $firstName, $lastName, $phone, $email, $address, $inData["ID"], $inData["UserID"]);
+			$stmt->bind_param("sssssss", $firstName, $lastName, $phone, $email, $address, $inData["ID"], $inData["UserID"]);
 			
 			$stmt->execute();
 			$stmt->close();
@@ -27,7 +27,7 @@
 		}
 		catch(Exception $ex)
 		{
-			returnWithError( $$ex->getMessage )
+			returnWithError( $ex->getMessage )
 		}	
 	}
 
