@@ -193,7 +193,7 @@ function searchContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("searchResults").innerHTML = "\nContact(s) has been retrieved";
+				document.getElementById("searchResults").innerHTML = "\n\nSearch Results:";
 				let jsonObject = JSON.parse( xhr.responseText );
 				var table = document.getElementById("contactList");
 				for( let i=0; i<jsonObject.results.length; i++ )
@@ -204,7 +204,10 @@ function searchContact()
 				  var phone = row.insertCell(2);
 				  var email = row.insertCell(3);
 				  var address = row.insertCell(4);
-
+					var cellInstruction = row.insertCell(5);
+					    cellInstruction.innerHTML = '	<button type="button" id="editButton" class="buttons2" onclick="doLogout();"> Edit </button>'
+					var cellInstruction = row.insertCell(6);
+					    cellInstruction.innerHTML = cellInstruction.innerHTML = '	<button type="button" id="deleteButton" class="buttons2" onclick="doLogout();"> Delete </button>'
 					first.innerHTML = jsonObject.results[i].FirstName;
 					last.innerHTML = jsonObject.results[i].LastName;
 					phone.innerHTML = jsonObject.results[i].Phone;
