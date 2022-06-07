@@ -177,7 +177,7 @@ function searchContact()
 	let srch = document.getElementById("search").value;
 	document.getElementById("searchResults").innerHTML = "";
 
-	let contactList = "";
+	// let contactList = "";
 
 	let tmp = {search:srch,userId:userId};
 	let jsonPayload = JSON.stringify( tmp );
@@ -193,15 +193,27 @@ function searchContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("searchResults").innerHTML = "Contact(s) has been retrieved";
+				document.getElementById("searchResults").innerHTML = "\nContact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
-
+				var table = document.getElementById("contactList");
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
-					contactList += jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + " " + jsonObject.results[i].Phone + " " + jsonObject.results[i].Email + " " + jsonObject.results[i].Address;
+					var row = table.insertRow();
+				  var first = row.insertCell(0);
+				  var last = row.insertCell(1);
+				  var phone = row.insertCell(2);
+				  var email = row.insertCell(3);
+				  var address = row.insertCell(4);
+
+					first.innerHTML = jsonObject.results[i].FirstName;
+					last.innerHTML = jsonObject.results[i].LastName;
+					phone.innerHTML = jsonObject.results[i].Phone;
+					email.innerHTML = jsonObject.results[i].Email;
+					address.innerHTML = jsonObject.results[i].Address;
+					// contactList += jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + " " + jsonObject.results[i].Phone + " " + jsonObject.results[i].Email + " " + jsonObject.results[i].Address;
 					if( i < jsonObject.results.length - 1 )
 					{
-						contactList += "<br />\r\n\n";
+						contactList += "<br />\r\n";
 					}
 				}
 
@@ -253,6 +265,29 @@ function addContact()
     {
         document.getElementById("AddContactsResult").innerHTML = err.message;
     }
+}
+
+function editContact()
+{
+	// let newFrName = document.getElementById("editFirstName").value;
+	// let newLaName = document.getElementById("editLastName").value;
+	// let newPhone = document.getElementById("editPhoneNumber").value;
+	// let newEmail = document.getElementById("editEmail").value;
+	// let newAddress = document.getElementById("editAddress").value;
+	//
+	// let tmp = {firstName:newFrName,lastName:newLaName,phoneNumber:newPhone,email:newEmail,address:newAddress,userId:userId};
+	// let jsonPayload = JSON.stringify( tmp );
+	//
+	// let url = urlBase + '/SearchContacts.' + extension;
+	//
+	// let xhr = new XMLHttpRequest();
+	// xhr.open("POST", url, true);
+	// xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+}
+
+function deleteContact()
+{
+
 }
 
 function goAddContact()
