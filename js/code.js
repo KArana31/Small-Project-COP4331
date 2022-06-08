@@ -290,7 +290,8 @@ function editContact()
 
 function deleteContact()
 {
-
+	var table = document.getElementById("contactList");
+	document.getElementById("row")[i].remove();
 }
 
 function goAddContact()
