@@ -30,7 +30,8 @@
 								"LastName": "'. $row["LastName"]. '",
 								"Phone": "'. $row["Phone"]. '",
 								"Email": "' . $row["Email"]. '",
-								"Address": "'. $row["Address"]. '"}';
+								"Address": "'. $row["Address"]. '",
+								"ID": "'. $row["ID"]'"}';
 		}
 		
 		if( $searchCount == 0 )
