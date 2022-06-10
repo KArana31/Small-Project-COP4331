@@ -26,12 +26,12 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"FirstName": "'. $row["FirstName"]. '",
+			$searchResults .= '{"ID": "'. $row["ID"]. '",
+								"FirstName": "'. $row["FirstName"]. '",
 								"LastName": "'. $row["LastName"]. '",
 								"Phone": "'. $row["Phone"]. '",
 								"Email": "' . $row["Email"]. '",
-								"Address": "'. $row["Address"]. '",
-								"ID": "'. $row["ID"]'"}';
+								"Address": "'. $row["Address"]. '"}';
 		}
 		
 		if( $searchCount == 0 )
