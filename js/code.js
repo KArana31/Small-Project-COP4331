@@ -207,7 +207,10 @@ function searchContact()
 					var cellInstruction = row.insertCell(5);
 					    cellInstruction.innerHTML = '	<button type="button" id="editButton" class="buttons2" onclick="doLogout();"> Edit </button>'
 					var cellInstruction = row.insertCell(6);
-					    cellInstruction.innerHTML = cellInstruction.innerHTML = '	<button type="button" id="deleteButton" class="buttons2" onclick="doLogout();"> Delete </button>'
+					    cellInstruction.innerHTML = cellInstruction.innerHTML = '	<button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button>'
+
+					let id = jsonObject.results[i].id;
+
 					first.innerHTML = jsonObject.results[i].FirstName;
 					last.innerHTML = jsonObject.results[i].LastName;
 					phone.innerHTML = jsonObject.results[i].Phone;
@@ -258,7 +261,7 @@ function addContact()
             {
                 document.getElementById("AddContactsResult").innerHTML = "Contact has been added.";
 								saveCookie();
-				//backToHome();
+								backToHome();
 			}
         };
         xhr.send(jsonPayload);
@@ -288,15 +291,56 @@ function editContact()
 	// xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 }
 
-function deleteContact()
+function deleteContact(info)
 {
-	var table = document.getElementById("contactList");
-	document.getElementById("row")[i].remove();
+
+	 let frName = document.getElementById("FirstName").value;
+	 let laName = document.getElementById("LastName").value;
+	 let phone = document.getElementById("phoneNumber").value;
+	 let email = document.getElementById("email").value;
+	 let address = document.getElementById("address").value;
+	document.getElementById("DeleteContactsResult").innerHTML = "";
+
+
+	let tmp = {ID:ID, userId:userId};
+//  var tmp = {login:login,password:hash};
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/DeleteContacts.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+			xhr.onreadystatechange = function()
+			{
+					if (this.readyState == 4 && this.status == 200)
+					{
+						let row = info.parentNode.parentNode.rowIndex;
+						alert(row);
+						//Get the reference of the Table.
+						var table = document.getElementById("contactList");
+						//Delete the Table row using it's Index.
+						table.deleterow(row);
+						//document.getElementById("DeleteContactsResult").innerHTML = "Contact has been deleted.";
+						saveCookie();
+					}
+			};
+			xhr.send(jsonPayload);
+	}
+
+	catch (err)
+	{
+			document.getElementById("DeleteContactsResult").innerHTML = err.message;
+	}
 }
+
 
 function goAddContact()
 {
 	readCookie();
 	window.location.href = "addcontact.html";
 	// let url = urlBase + '/Register.' + extension;
-}
+
