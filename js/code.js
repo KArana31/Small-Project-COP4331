@@ -5,6 +5,12 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+let ID = 0;
+let editfirstName = "";
+let editlastName = "";
+let editphoneNumber = "";
+let editemail = "";
+let editaddress = "";
 
 function doLogin()
 {
@@ -98,6 +104,90 @@ function readCookie()
 	{
 		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
+}
+
+function readCookie2()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for (var i = 0; i < splits.length; i++)
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		if (tokens[0] == "firstName") {
+			firstName = tokens[1];
+		}
+		else if (tokens[0] == "lastName") {
+			lastName = tokens[1];
+		}
+		else if (tokens[0] == "userId") {
+			userId = parseInt(tokens[1].trim());
+		}
+	}
+}
+
+function saveConCookie()
+{
+	ID = event.target.parentNode.parentNode.id;
+	var rowdata = document.getElementById(ID).querySelectorAll(".rowdata");
+
+	editfirstName = rowdata[0].innerHTML;
+	editlastName = rowdata[1].innerHTML;
+	editphoneNumber = rowdata[2].innerHTML;
+	editemail = rowdata[3].innerHTML;
+	editaddress = rowdata[4].innerHTML;
+
+	let minutes = 20;
+	let date = new Date();
+	date.setTime(date.getTime() + (minutes * 60 * 1000));
+	document.cookie = "ID=" + ID + ",editfirstName=" + editfirstName + ",editlastName=" + editlastName + ",editphoneNumber=" + editphoneNumber + ",editemail=" + editemail + ",editaddress=" + editaddress +  ";expires=" + date.toGMTString();
+}
+
+function readConCookie()
+{
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++)
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+
+		if (tokens[0] == "ID")
+		{
+			ID = parseInt(tokens[1].trim());
+		}
+		else if (tokens[0] == "editfirstName")
+		{
+			editfirstName = tokens[1];
+		}
+		else if (tokens[0] == "editlastName" )
+		{
+			editlastName = tokens[1];
+		}
+		else if (tokens[0] == "editphoneNumber" )
+		{
+			editphoneNumber = tokens[1];
+		}
+		else if (tokens[0] == "editemail" )
+		{
+			editemail = tokens[1];
+		}
+		else if (tokens[0] == "editaddress" )
+		{
+			editaddress = tokens[1];
+		}
+
+	}
+
+	// if( userId < 0 )
+	// {
+	// 	window.location.href = "index.html";
+	// }
+	// else
+	// {
+	// 	document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+	// }
 }
 
 function createUser()
@@ -195,35 +285,46 @@ function searchContact()
 			{
 				document.getElementById("searchResults").innerHTML = "\n\nSearch Results:";
 				let jsonObject = JSON.parse( xhr.responseText );
-				var table = document.getElementById("contactList");
-				for( let i=0; i<jsonObject.results.length; i++ )
+				//var table = document.getElementById("contactList");
+
+				for (let i = 0; i < jsonObject.results.length; i++)
 				{
-					var row = table.insertRow();
-				  var first = row.insertCell(0);
-				  var last = row.insertCell(1);
-				  var phone = row.insertCell(2);
-				  var email = row.insertCell(3);
-				  var address = row.insertCell(4);
-					var cellInstruction = row.insertCell(5);
-					    cellInstruction.innerHTML = '	<button type="button" id="editButton" class="buttons2" onclick="doLogout();"> Edit </button>'
-					var cellInstruction = row.insertCell(6);
-					    cellInstruction.innerHTML = cellInstruction.innerHTML = '	<button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button>'
+					document.getElementById("contactList").innerHTML +=
+					`
+						<tr id = "${jsonObject.results[i].ID}" class="contact">
+							<td class ="rowdata">${jsonObject.results[i].FirstName}</td>
+							<td class ="rowdata">${jsonObject.results[i].LastName}</td>
+							<td class ="rowdata">${jsonObject.results[i].Phone}</td>
+							<td class ="rowdata">${jsonObject.results[i].Email}</td>
+							<td class ="rowdata">${jsonObject.results[i].Address}</td>
+							<td class ="rowdata"><button type="button" id="editButton" class="buttons2" onclick="saveConCookie(); goEditContact();"> Edit </button></td>
+							<td class ="rowdata"><button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button></td>
+						</tr>
+					`
+                }
+//				for( let i=0; i<jsonObject.results.length; i++ )
+//				{
+//					var row = table.insertRow();
+//				  var first = row.insertCell(0);
+//				  var last = row.insertCell(1);
+//				  var phone = row.insertCell(2);
+//				  var email = row.insertCell(3);
+//				  var address = row.insertCell(4);
+//					var cellInstruction = row.insertCell(5);
+//						cellInstruction.innerHTML = '<button type="button" id="editButton" class="buttons2" onclick="saveConCookie(); goEditContact();"> Edit </button>'
+//					var cellInstruction = row.insertCell(6);
+//						cellInstruction.innerHTML = cellInstruction.innerHTML = '<button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button>'
+//
+//					let id = jsonObject.results[i].id;
+//
+//					first.innerHTML = jsonObject.results[i].FirstName;
+//					last.innerHTML = jsonObject.results[i].LastName;
+//					phone.innerHTML = jsonObject.results[i].Phone;
+//					email.innerHTML = jsonObject.results[i].Email;
+//					address.innerHTML = jsonObject.results[i].Address;
+//				}
 
-					let id = jsonObject.results[i].id;
 
-					first.innerHTML = jsonObject.results[i].FirstName;
-					last.innerHTML = jsonObject.results[i].LastName;
-					phone.innerHTML = jsonObject.results[i].Phone;
-					email.innerHTML = jsonObject.results[i].Email;
-					address.innerHTML = jsonObject.results[i].Address;
-					// contactList += jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + " " + jsonObject.results[i].Phone + " " + jsonObject.results[i].Email + " " + jsonObject.results[i].Address;
-					if( i < jsonObject.results.length - 1 )
-					{
-						contactList += "<br />\r\n";
-					}
-				}
-
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
@@ -275,21 +376,43 @@ function addContact()
 
 function editContact()
 {
-	// let newFrName = document.getElementById("editFirstName").value;
-	// let newLaName = document.getElementById("editLastName").value;
-	// let newPhone = document.getElementById("editPhoneNumber").value;
-	// let newEmail = document.getElementById("editEmail").value;
-	// let newAddress = document.getElementById("editAddress").value;
-	//
-	// let tmp = {firstName:newFrName,lastName:newLaName,phoneNumber:newPhone,email:newEmail,address:newAddress,userId:userId};
-	// let jsonPayload = JSON.stringify( tmp );
-	//
-	// let url = urlBase + '/SearchContacts.' + extension;
-	//
-	// let xhr = new XMLHttpRequest();
-	// xhr.open("POST", url, true);
-	// xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    let frName = document.getElementById("editfirstName").value;
+	let laName = document.getElementById("editlastName").value;
+	let phone = document.getElementById("editphoneNumber").value;
+	let email = document.getElementById("editemail").value;
+	let address = document.getElementById("editaddress").value;
+	document.getElementById("EditContactResult").innerHTML = "";
+
+	let tmp = { editfirstName: frName, editlastName: laName, editphoneNumber: phone, editemail: email, editaddress: address, ID:ID, userId:userId};
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/EditContacts.' + extension;
+	let xhr = new XMLHttpRequest();
+	 xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.onreadystatechange = function ()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				document.getElementById("EditContactResult").innerHTML = "Contact has been edited.";
+				saveCookie();
+	 			saveConCookie();
+	 			//backToHome();
+			}
+		};
+	 	xhr.send(jsonPayload);
+	}
+	
+	catch (err)
+	{
+		document.getElementById("EditContactResult").innerHTML = err.message;
+	}
 }
+
+
 
 function deleteContact(info)
 {
@@ -340,7 +463,11 @@ function deleteContact(info)
 
 function goAddContact()
 {
-	readCookie();
 	window.location.href = "addcontact.html";
 	// let url = urlBase + '/Register.' + extension;
+}
 
+function goEditContact()
+{
+	window.location.href = "editcontact.html";
+}
