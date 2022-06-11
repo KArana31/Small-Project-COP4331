@@ -298,7 +298,7 @@ function searchContact()
 							<td class ="rowdata">${jsonObject.results[i].Email}</td>
 							<td class ="rowdata">${jsonObject.results[i].Address}</td>
 							<td class ="rowdata"><button type="button" id="editButton" class="buttons2" onclick="saveConCookie(); goEditContact();"> Edit </button></td>
-							<td class ="rowdata"><button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button></td>
+							<td class ="rowdata"><button type="button" id="deleteButton" class="buttons2" onclick="deleteContact();"> Delete </button></td>
 						</tr>
 					`
                 }
@@ -414,19 +414,12 @@ function editContact()
 
 
 
-function deleteContact(info)
+function deleteContact()
 {
-
-	 let frName = document.getElementById("FirstName").value;
-	 let laName = document.getElementById("LastName").value;
-	 let phone = document.getElementById("phoneNumber").value;
-	 let email = document.getElementById("email").value;
-	 let address = document.getElementById("address").value;
+	ID = event.target.parentNode.parentNode.id;
 	document.getElementById("DeleteContactsResult").innerHTML = "";
 
-
 	let tmp = {ID:ID, userId:userId};
-//  var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/DeleteContacts.' + extension;
@@ -437,21 +430,15 @@ function deleteContact(info)
 
 	try
 	{
-			xhr.onreadystatechange = function()
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
 			{
-					if (this.readyState == 4 && this.status == 200)
-					{
-						let row = info.parentNode.parentNode.rowIndex;
-						alert(row);
-						//Get the reference of the Table.
-						var table = document.getElementById("contactList");
-						//Delete the Table row using it's Index.
-						table.deleterow(row);
-						//document.getElementById("DeleteContactsResult").innerHTML = "Contact has been deleted.";
-						saveCookie();
-					}
-			};
-			xhr.send(jsonPayload);
+				document.getElementById(ID).remove();
+				document.getElementById("DeleteContactsResult").innerHTML = "Contact has been deleted.";
+			}
+		};
+		xhr.send(jsonPayload);
 	}
 
 	catch (err)
