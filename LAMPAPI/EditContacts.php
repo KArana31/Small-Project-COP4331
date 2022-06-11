@@ -2,11 +2,11 @@
 
 	$inData = getRequestInfo();
 	
-	$firstName = $inData["firstName"];
-	$lastName = $inData["lastName"];
-	$phone = $inData["phoneNumber"];
-	$email = $inData["email"];
-	$address = $inData["address"];
+	$firstName = $inData["editfirstName"];
+	$lastName = $inData["editlastName"];
+	$phone = $inData["editphoneNumber"];
+	$email = $inData["editemail"];
+	$address = $inData["editaddress"];
 	$ID = $inData["ID"];
 	$userId = $inData["userId"];
 	
@@ -27,9 +27,10 @@
 			
 			returnWithError("");
 		}
+		
 		catch(Exception $ex)
 		{
-			returnWithError( $ex->getMessage )
+			returnWithError($ex->getMessage);
 		}	
 	}
 
@@ -49,6 +50,4 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-
-
 ?>
