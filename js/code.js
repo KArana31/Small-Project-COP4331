@@ -20,12 +20,12 @@ function doLogin()
 
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
+	// var hash = md5( password );
 
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
+	// var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/LoginAPI.' + extension;
@@ -201,8 +201,14 @@ function createUser()
     let password = document.getElementById("regPassword").value;
     document.getElementById("registerResult").innerHTML = "";
 
+		if(login.length < 8 || login.length > 15 || password.length < 8 || password.length > 15)
+		{
+			document.getElementById("registerResult").innerHTML = "Invalid username or password length"
+			return;
+		}
+
     var tmp = {firstName:fName,lastName:lName,login:login,password:password};
-//  var tmp = {login:login,password:hash};
+		// var tmp = {login:login,password:hash};
     let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/Register.' + extension;
@@ -217,12 +223,12 @@ function createUser()
         {
             if (this.readyState == 4 && this.status == 200)
             {
-                document.getElementById("registerResult").innerHTML = "User has been created.";
-				backToLogin();
+                document.getElementById("registerResult").innerHTML = "User has been created";
+								backToLogin();
             }
             else
 			{
-				document.getElementById("registerResult").innerHTML = "Invalid Username or Password.";
+				document.getElementById("registerResult").innerHTML = "Invalid Username or Password";
 			}
         };
         xhr.send(jsonPayload);
@@ -238,19 +244,16 @@ function createUser()
 function goRegister()
 {
 	window.location.href = "register.html";
-	// let url = urlBase + '/Register.' + extension;
 }
 
 function backToLogin()
 {
 	window.location.href = "index.html";
-	// let url = urlBase + '/Index.' + extension;
 }
 
 function backToHome()
 {
 	window.location.href = "color.html";
-	// let url = urlBase + '/Index.' + extension;
 }
 
 function doLogout()
@@ -266,8 +269,7 @@ function searchContact()
 {
 	let srch = document.getElementById("search").value;
 	document.getElementById("searchResults").innerHTML = "";
-
-	// let contactList = "";
+	document.getElementById("contactList").innerHTML = "";
 
 	let tmp = {search:srch,userId:userId};
 	let jsonPayload = JSON.stringify( tmp );
@@ -283,9 +285,19 @@ function searchContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				document.getElementById("searchResults").innerHTML = "\n\nSearch Results:";
+				document.getElementById("searchResults").innerHTML += `<p style="font-size: 30px;"><b>Search Results:</b></p>`;
 				let jsonObject = JSON.parse( xhr.responseText );
 				//var table = document.getElementById("contactList");
+				document.getElementById("contactList").innerHTML +=
+				`<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Address</th>
+					<th>Edit Contact</th>
+					<th>Delete Contact</th>
+				</tr>`
 
 				for (let i = 0; i < jsonObject.results.length; i++)
 				{
@@ -298,33 +310,11 @@ function searchContact()
 							<td class ="rowdata">${jsonObject.results[i].Email}</td>
 							<td class ="rowdata">${jsonObject.results[i].Address}</td>
 							<td class ="rowdata"><button type="button" id="editButton" class="buttons2" onclick="saveConCookie(); goEditContact();"> Edit </button></td>
-							<td class ="rowdata"><button type="button" id="deleteButton" class="buttons2" onclick="deleteContact();"> Delete </button></td>
+							<td class ="rowdata"><button type="button" id="deleteButton" class="buttons2"
+							onclick="confirmation('Are you sure you want to delete ${jsonObject.results[i].FirstName} ${jsonObject.results[i].LastName} from your contacts?', deleteContact());"> Delete </button></td>
 						</tr>
 					`
-                }
-//				for( let i=0; i<jsonObject.results.length; i++ )
-//				{
-//					var row = table.insertRow();
-//				  var first = row.insertCell(0);
-//				  var last = row.insertCell(1);
-//				  var phone = row.insertCell(2);
-//				  var email = row.insertCell(3);
-//				  var address = row.insertCell(4);
-//					var cellInstruction = row.insertCell(5);
-//						cellInstruction.innerHTML = '<button type="button" id="editButton" class="buttons2" onclick="saveConCookie(); goEditContact();"> Edit </button>'
-//					var cellInstruction = row.insertCell(6);
-//						cellInstruction.innerHTML = cellInstruction.innerHTML = '<button type="button" id="deleteButton" class="buttons2" onclick="deleteContact(this);"> Delete </button>'
-//
-//					let id = jsonObject.results[i].id;
-//
-//					first.innerHTML = jsonObject.results[i].FirstName;
-//					last.innerHTML = jsonObject.results[i].LastName;
-//					phone.innerHTML = jsonObject.results[i].Phone;
-//					email.innerHTML = jsonObject.results[i].Email;
-//					address.innerHTML = jsonObject.results[i].Address;
-//				}
-
-
+        }
 			}
 		};
 		xhr.send(jsonPayload);
@@ -344,8 +334,38 @@ function addContact()
     let address = document.getElementById("address").value;
     document.getElementById("AddContactsResult").innerHTML = "";
 
+		// Phone number format
+		var phoneForm = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+		// Contacts won't be added if inputs are invalid format
+		if(frName.length > 50 || frName.length == 0)
+		{
+			document.getElementById("AddContactsResult").innerHTML = "Invalid first name";
+			return;
+		}
+		else if(laName.length > 50 || laName.length == 0)
+		{
+			document.getElementById("AddContactsResult").innerHTML = "Invalid last name";
+			return;
+		}
+		else if(!phone.match(phoneForm))
+		{
+			document.getElementById("AddContactsResult").innerHTML = "Invalid phone number";
+			return;
+		}
+		else if(email.length > 50 || email.length == 0)
+		{
+			document.getElementById("AddContactsResult").innerHTML = "Invalid email";
+			return;
+		}
+		else if(address.length > 50)
+		{
+			document.getElementById("AddContactsResult").innerHTML = "Invalid address";
+			return;
+		}
+
     let tmp = {firstName:frName,lastName:laName,phoneNumber:phone,email:email,address:address,userId:userId};
-//  var tmp = {login:login,password:hash};
+		// var tmp = {login:login,password:hash};
     let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/AddContacts.' + extension;
@@ -360,14 +380,18 @@ function addContact()
         {
             if (this.readyState == 4 && this.status == 200)
             {
-                document.getElementById("AddContactsResult").innerHTML = "Contact has been added.";
+                document.getElementById("AddContactsResult").innerHTML = "Contact has been added";
 								saveCookie();
-								backToHome();
-			}
+								document.getElementById("firstName").value = "";
+								document.getElementById("lastName").value = "";
+								document.getElementById("phoneNumber").value = "";
+								document.getElementById("email").value = "";
+								document.getElementById("address").value = "";
+								// backToHome();
+						}
         };
         xhr.send(jsonPayload);
     }
-
     catch (err)
     {
         document.getElementById("AddContactsResult").innerHTML = err.message;
@@ -376,7 +400,7 @@ function addContact()
 
 function editContact()
 {
-    let frName = document.getElementById("editfirstName").value;
+  let frName = document.getElementById("editfirstName").value;
 	let laName = document.getElementById("editlastName").value;
 	let phone = document.getElementById("editphoneNumber").value;
 	let email = document.getElementById("editemail").value;
@@ -388,7 +412,7 @@ function editContact()
 
 	let url = urlBase + '/EditContacts.' + extension;
 	let xhr = new XMLHttpRequest();
-	 xhr.open("POST", url, true);
+ xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
 	try
@@ -405,14 +429,11 @@ function editContact()
 		};
 	 	xhr.send(jsonPayload);
 	}
-	
 	catch (err)
 	{
 		document.getElementById("EditContactResult").innerHTML = err.message;
 	}
 }
-
-
 
 function deleteContact()
 {
@@ -435,23 +456,33 @@ function deleteContact()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				document.getElementById(ID).remove();
-				document.getElementById("DeleteContactsResult").innerHTML = "Contact has been deleted.";
+				document.getElementById("DeleteContactsResult").innerHTML = "Contact has been deleted";
 			}
 		};
 		xhr.send(jsonPayload);
 	}
-
 	catch (err)
 	{
 			document.getElementById("DeleteContactsResult").innerHTML = err.message;
 	}
 }
 
+function confirmation(message, yesCallback) {
+	$('.title').html(message);
+	var dialog = $('#modal_dialog').dialog();
+
+	$('#btnYes').click(function () {
+		dialog.dialog('close');
+		yesCallback();
+	});
+	$('#btnNo').click(function () {
+		dialog.dialog('close');
+	});
+}
 
 function goAddContact()
 {
 	window.location.href = "addcontact.html";
-	// let url = urlBase + '/Register.' + extension;
 }
 
 function goEditContact()
