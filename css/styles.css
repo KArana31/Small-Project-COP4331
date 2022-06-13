@@ -274,6 +274,19 @@ select
     color: #FFFFFF;
 }
 
+#AddContactsResult
+{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  margin-right: 0%;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  color: #000000;
+  font-size: 15px;
+}
+
 
 #contactSearchResult{
     display: none;
