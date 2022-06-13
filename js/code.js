@@ -102,7 +102,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Hello " + firstName + " " + lastName;
 	}
 }
 
@@ -269,7 +269,7 @@ function searchContact() {
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("searchResults").innerHTML += `<p style="font-size: 30px;"><b>Search Results:</b></p>`;
+				document.getElementById("searchResults").innerHTML += `<p style="font-size: 20px;"><b>Search Results:</b></p>`;
 				let jsonObject = JSON.parse(xhr.responseText);
 				//var table = document.getElementById("contactList");
 				document.getElementById("contactList").innerHTML +=
@@ -400,7 +400,7 @@ function editContact()
 		};
 	 	xhr.send(jsonPayload);
 	}
-	
+
 	catch (err)
 	{
 		document.getElementById("EditContactResult").innerHTML = err.message;
@@ -422,6 +422,8 @@ function queryEdit()
 		boxWidth: '30%',
 		useBootstrap: false,
 		title: 'Edit Contact',
+		fontSize: 20 ,
+		fontFamily: "verdana,sans-serif",
 		content:
 			`
 			<form action="" class="contactEdit">
@@ -440,7 +442,7 @@ function queryEdit()
 			formSubmit:
 			{
 				text: 'Save',
-				btnClass: 'btn-blue',
+				btnClass: 'button-8',
 				action: function () {
 					editContact();
 				}
