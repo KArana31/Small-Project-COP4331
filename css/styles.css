@@ -19,9 +19,9 @@ body
     font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
     font-size: 60px;
     font-weight: bold;
-    width: 40%;
+    width: 30%;
     padding: 25px;
-    margin-left: 28%;
+    margin-left: 32%;
     margin-top: 1%;
     background-color: #9BE7CD;
     background-image: url(https://houstonse.org/wp-content/uploads/2020/11/abstract-geometric-background-polygon-triangle-wallpaper-dark-blue-color_206846-1070.jpg);
@@ -33,9 +33,9 @@ body
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
   font-size: 60px;
   font-weight: bold;
-  width: 40%;
+  width: 30%;
   padding: 25px;
-  margin-left: 28%;
+  margin-left: 32%;
   margin-top: 5%;
   background-color: #9BE7CD;
   background-image: url(https://houstonse.org/wp-content/uploads/2020/11/abstract-geometric-background-polygon-triangle-wallpaper-dark-blue-color_206846-1070.jpg);
@@ -46,8 +46,8 @@ body
 {
     font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
     font-size: 40px;
-    width: 40%;
-    margin-left: 28%;
+    width: 30%;
+    margin-left: 32%;
     padding: 25px;
     background-color: #FFFFFF;
     border-radius: 0px 0px 10px 10px;
@@ -82,6 +82,7 @@ body
 #colorText, #regUsername, #regPassword, #email, #phoneNumber, #address
 {
 	font-size: 20px;
+  margin-left:10%;
 }
 
 #search
@@ -90,7 +91,9 @@ body
   margin-bottom: 2%;
   height: 28px;
   width: 50%;
-  margin-left: 25%
+  margin-left: 15%;
+  align-items: center;
+
 }
 
 #login-rules
@@ -111,7 +114,6 @@ input[type="text"], input[type="password"]
     border-width: 0px 0px 2px 0px;
     text-align: left;
     width: 80%;
-    margin-left: 10%;
     margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
 }
@@ -187,17 +189,20 @@ input[type="text"], input[type="password"]
 }
 
 #addContactButton{
-  width: 40%;
-  margin-left: 30%;
-  margin-top: 3%;
-  color: #FFFFFF
+  width: 15%;
+  height: 4%;
+  color: #FFFFFF;
+  padding-top: 11px;
 
 }
 
 
 #searchContactButton{
   width: 5%;
-  color: #FFFFFF
+  height: 4%;
+  color: #FFFFFF;
+  align-items: center;
+
 
 }
 
@@ -286,7 +291,6 @@ select
   color: #000000;
   font-size: 15px;
 }
-
 
 #contactSearchResult{
     display: none;
